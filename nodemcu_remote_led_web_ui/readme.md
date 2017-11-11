@@ -1,4 +1,4 @@
-# Using ESP8862 with Arduino IDE
+# Using ESP8266 with Arduino IDE
 
 - Start Arduino
 - Open preferences
