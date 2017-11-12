@@ -1,7 +1,8 @@
 # Using ESP8266 with Arduino IDE
 
 This source is for the pre recorded and live series that can be found here:
-
+<a href="https://www.youtube.com/watch?v=WqcbU9HbveI&list=PLAkMqlQoeMei6hBKdHh5C5NIHGzQgm-lW">
+<img style="width:640" src="https://i.ytimg.com/vi/OLsH1kq1NWs/maxresdefault_live.jpg"></a>
 https://www.youtube.com/watch?v=WqcbU9HbveI&list=PLAkMqlQoeMei6hBKdHh5C5NIHGzQgm-lW
 
 ## Materials Needed
