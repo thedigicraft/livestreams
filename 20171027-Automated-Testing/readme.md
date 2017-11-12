@@ -1,5 +1,9 @@
 # Oct 27 2017 - Automated Website Testing with Selenium
 
+<a href="https://www.youtube.com/watch?v=yZvELzHlukc">
+  <img src="https://i.ytimg.com/vi/Es8JDy0dInw/maxresdefault_live.jpg">
+  </a>
+
 ## The Tools You Need
 
 ### Python 2.7.x
