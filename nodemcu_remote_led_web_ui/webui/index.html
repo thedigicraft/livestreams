@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>NodeMCU Demo</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+    <!-- Light CSS -->
+    <link rel="stylesheet" href="light.css">
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <h1>NodeMCU Demo <span class="pull-right"><div id="light"></div></span></h1>
+
+          <button type="button" id="toggle" data-state="1" class="btn btn-danger">Toggle</button> (push the button)
+
+        </div>
+        <div class="col">
+          <table class="table table-bordered table-sm table-striped">
+            <thead>
+              <tr>
+                <th>
+                  State
+                </th>
+                <th>
+                  Where
+                </th>
+                <th>
+                  When
+                </th>
+              </tr>
+            </thead>
+            <tbody id="log"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <script>
+
+      function current_state() {
+        btn = $('#toggle');
+        light = $('#light');
+        log = $('#log');
+        $.ajax({
+          url: 'toggle.php?current',
+          method: 'get',
+          success: function(data){
+            if(data==1){
+              btn.data('state', '0');
+              light.addClass('on');
+              light.removeClass('off');
+              btn.addClass('btn-danger');
+              btn.removeClass('btn-success');
+              btn.html('Turn Off');
+            }else{
+              btn.data('state', '1');
+              light.addClass('off');
+              light.removeClass('on');
+              btn.addClass('btn-success');
+              btn.removeClass('btn-danger');
+              btn.html('Turn On');
+            }
+          }
+        });
+        $.ajax({
+          url: 'toggle.php?log',
+          method: 'get',
+          success: function(data){
+            var lines = data.split('\n');
+            lines.reverse();
+            var result = '';
+            for(var i = 0;i < lines.length;i++){
+              if (lines[i] != ''){
+                var cells = lines[i].split('-');
+                cell = '<tr>';
+                for(var x = 0;x < cells.length;x++){
+                  cell = cell+'<td>'+cells[x]+'</td>';
+                }
+                cell = cell+'</tr>';
+                result = result+cell;
+              }
+            }
+            log.html(result);
+          }
+        });
+      }
+
+
+      $(document).ready(function(){
+        current_state();
+        setInterval(current_state, 1000);
+        $('#toggle').click(function(){
+          var current = $(this).data('state');
+          $.ajax({
+            url: 'toggle.php?state='+current,
+            method: 'get'
+          });
+        });
+
+      });
+
+    </script>
+  </body>
+</html>
